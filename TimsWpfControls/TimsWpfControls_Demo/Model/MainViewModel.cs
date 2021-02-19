@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Theming;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using TimsWpfControls.Model;
 
 namespace TimsWpfControls_Demo.Model
 {
-    public class MainViewModel : BaseClass
+    public class MainViewModel : ObservableObject
     {
 
         public MainViewModel()
@@ -29,6 +30,16 @@ namespace TimsWpfControls_Demo.Model
             "short",
             "sample"
         };
+
+
+        public static Collection<Person> People { get; } = new Collection<Person>()
+        {
+            new Person(){ FirstName="Donald", LastName="Duck", Age=-1, Gender = Gender.Male },
+            new Person(){ FirstName="Daisy", Age=2, Gender=Gender.Female },
+            new Person(){ FirstName="Tim", LastName="U", Age=32, Gender = Gender.Male },
+            new Person(){ FirstName="Person 1", LastName="Person A", Age=5, Gender = Gender.Diverse },
+        };
+
 
 
         #region ColorPicker
@@ -75,7 +86,7 @@ namespace TimsWpfControls_Demo.Model
         public Color AccentColor
         {
             get { return _AccentColor; }
-            set { _AccentColor = value; RaisePropertyChanged(nameof(AccentColor)); }
+            set { _AccentColor = value; OnPropertyChanged(nameof(AccentColor)); }
         }
 
 
@@ -84,7 +95,7 @@ namespace TimsWpfControls_Demo.Model
         public Color HighlightColor
         {
             get { return _HighlightColor; }
-            set { _HighlightColor = value; RaisePropertyChanged(nameof(HighlightColor)); }
+            set { _HighlightColor = value; OnPropertyChanged(nameof(HighlightColor)); }
         }
 
 
@@ -94,14 +105,14 @@ namespace TimsWpfControls_Demo.Model
         public string BaseTheme
         {
             get { return _BaseTheme; }
-            set { _BaseTheme = value; RaisePropertyChanged(nameof(BaseTheme)); ChangeAppTheme(); }
+            set { _BaseTheme = value; OnPropertyChanged(nameof(BaseTheme)); ChangeAppTheme(); }
         }
 
         private bool _UseSolidAccent;
         public bool UseSolidAccent
         {
             get { return _UseSolidAccent; }
-            set { _UseSolidAccent = value; RaisePropertyChanged(nameof(UseSolidAccent)); ChangeAppTheme(); }
+            set { _UseSolidAccent = value; OnPropertyChanged(nameof(UseSolidAccent)); ChangeAppTheme(); }
         }
 
 
@@ -126,7 +137,7 @@ namespace TimsWpfControls_Demo.Model
 
         #endregion ThemeMananger
 
-        public static List<Color> AccentColors = new List<Color>()
+        public static Collection<Color> AccentColors = new Collection<Color>()
         {
             (Color)App.Current.Resources["MahApps.Colors.Accent"],
             (Color)App.Current.Resources["MahApps.Colors.Accent2"],

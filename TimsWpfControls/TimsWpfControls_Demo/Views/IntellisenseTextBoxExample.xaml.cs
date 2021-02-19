@@ -19,22 +19,11 @@ namespace TimsWpfControls_Demo.Views
     /// </summary>
     public partial class IntellisenseTextBoxExample : UserControl
     {
-        private static readonly string xaml = @"
-<local:IntellisenseTextBoxExample />
-";
-
         public IntellisenseTextBoxExample()
         {
             InitializeComponent();
 
-            ExampleViewBase.ExampleXaml = xaml;
-
-            ExampleViewBase.AddDemoProperty(TimsWpfControls.IntellisenseTextBox.WidthProperty, IntellisenseTextBox);
-            ExampleViewBase.AddDemoProperty(TimsWpfControls.IntellisenseTextBox.HeightProperty, IntellisenseTextBox);
-            ExampleViewBase.AddDemoProperty(TimsWpfControls.IntellisenseTextBox.SuffixAfterInsertProperty, IntellisenseTextBox);
-            ExampleViewBase.AddDemoProperty(TimsWpfControls.IntellisenseTextBox.AcceptsReturnProperty, IntellisenseTextBox);
-            ExampleViewBase.AddDemoProperty(TimsWpfControls.IntellisenseTextBox.AcceptsTabProperty, IntellisenseTextBox);
-            ExampleViewBase.AddDemoProperty(TimsWpfControls.IntellisenseTextBox.ContentAssistSourceProperty, IntellisenseTextBox);
+            ExampleViewBase.GetAllProperties(IntellisenseTextBox);
         }
     }
 }

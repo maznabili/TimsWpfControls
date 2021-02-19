@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="TimsWpfControls_Demo.Views.MultiselectionComboBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:TimsWpfControls;assembly=TimsWpfControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TimsWpfControls_Demo.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:TimsWpfControls_Demo.Model"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="Styles">
+            <ComboBox SelectedValue="{Binding Value}"
+                      SelectedValuePath="Tag"
+                                      IsEditable="True"
+                                      IsReadOnly="True"
+                                      SelectedIndex="0"
+                                      ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}">
+                <ComboBoxItem Content="Default: Tims.Styles.MultiSelectionComboBox" Tag="{DynamicResource Tims.Styles.MultiSelectionComboBox}" />
+                <ComboBoxItem Content="Horizontal: Tims.Styles.MultiSelectionComboBox.Horizontal" Tag="{DynamicResource Tims.Styles.MultiSelectionComboBox.Horizontal}" />
+            </ComboBox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ItemContainerStyles">
+            <ComboBox SelectedValue="{Binding Value}"
+                      SelectedValuePath="Tag"
+                                      IsEditable="True"
+                                      IsReadOnly="True"
+                                      SelectedIndex="0"
+                                      ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}">
+                <ComboBoxItem Content="Default: Tims.Styles.MultiSelectionComboBoxItem" Tag="{DynamicResource Tims.Styles.MultiSelectionComboBoxItem}" />
+                <ComboBoxItem Content="Checkbox: Tims.Styles.MultiSelectionComboBoxItem.CheckBox" Tag="{DynamicResource Tims.Styles.MultiSelectionComboBoxItem.CheckBox}" />
+            </ComboBox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SelectedItemContainerStyles">
+            <ComboBox SelectedValue="{Binding Value}"
+                      SelectedValuePath="Tag"
+                                      IsEditable="True"
+                                      IsReadOnly="True"
+                                      SelectedIndex="0"
+                                      ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}">
+                <ComboBoxItem Content="Default: Tims.Styles.MulitselectionComboBoxSelectedItem" Tag="{DynamicResource Tims.Styles.MulitselectionComboBoxSelectedItem}" />
+                <ComboBoxItem Content="Horizontal: Tims.Styles.MulitselectionComboBoxSelectedItem.Removeable" Tag="{DynamicResource Tims.Styles.MulitselectionComboBoxSelectedItem.Removeable}" />
+            </ComboBox>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <local:ExampleViewBase x:Name="demoView">
+        <StackPanel>
+            <ctrls:MultiSelectionComboBox x:Name="multiSelectionComboBox"
+                                      VerticalAlignment="Center"
+                                      Margin="5"
+                                      IsEditable="False"
+                                      IsReadOnly="False"
+                                      ObjectToStringComparer="{ctrls:DefaultObjectToStringComparer}"
+                                      mah:TextBoxHelper.ClearTextButton="True"
+                                      SelectionMode="Multiple"
+                                          VirtualizingPanel.IsVirtualizing="False"
+                                      Separator=", " 
+                                      ItemsSource="{x:Static model:SelectableProperty.Test}">
+                <ctrls:MultiSelectionComboBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource Tims.Styles.MultiSelectionComboBoxItem.CheckBox}">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    </Style>
+                </ctrls:MultiSelectionComboBox.ItemContainerStyle>
+            </ctrls:MultiSelectionComboBox>
+
+            <Button Click="Button_Click" Content="hit me " />
+
+        </StackPanel>
+
+    </local:ExampleViewBase>
+</UserControl>
